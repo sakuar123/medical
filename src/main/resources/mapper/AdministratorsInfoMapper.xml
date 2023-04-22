@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.medical.mapper.AdministratorsInfoMapper">
+
+    <select id="search" resultType="pageData">
+        SELECT
+        a.id as `id`,
+        a.administrator_name as `administratorName`,
+        a.administrator_account as `administratorAccount`,
+        (SELECT role_name FROM role_info WHERE id = a.role_id) as `roleName`,
+        a.administrator_phone as `administratorPhone`,
+        a.administrator_status as `administratorStatus`,
+        DATE_FORMAT(a.create_date,'%Y-%m-%d') as `createDate`
+        FROM administrators_info a
+        <where>
+            1=1
+            <if test="administratorName != null and administratorName != '' ">
+                and a.administrator_name like concat('%',#{administratorName,'%')
+            </if>
+        </where>
+        order by a.id desc
+    </select>
+
+</mapper>

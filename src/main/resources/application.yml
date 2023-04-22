@@ -1,0 +1,34 @@
+server:
+  port: 8092
+  name: medical
+  env: dev
+spring:
+  application:
+    name: medical
+  datasource:
+    url: jdbc:mysql://localhost:3306/medical?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 1
+    host: localhost
+    password:
+    jedis:
+      pool:
+        max-idle: 30
+        max-active: 50
+    port: 6379
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-circular-references: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.sakura.medical.common.utils
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.sakura.medical.entity

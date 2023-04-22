@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--
+配置文档 http://www.mybatis.org/mybatis-3/zh/configuration.html#settings
+-->
+<configuration>
+    <settings>
+        <!--禁用缓存,使用 spring cache 缓存-->
+        <setting name="cacheEnabled" value="false"/>
+        <!--是否允许单一语句返回多结果集（需要兼容驱动）-->
+        <setting name="multipleResultSetsEnabled" value="false"/>
+        <!--使用列标签代替列名。不同的驱动在这方面会有不同的表现， 具体可参考相关驱动文档或通过测试这两种不同的模式来观察所用驱动的结果。-->
+        <setting name="useColumnLabel" value="true"/>
+        <!--允许 JDBC 支持自动生成主键，需要驱动兼容。 如果设置为 true 则这个设置强制使用自动生成主键，尽管一些驱动不能兼容但仍可正常工作（比如 Derby）。-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--指定发现自动映射目标未知列（或者未知属性类型）的行为。
+        NONE: 不做任何反应
+        WARNING: 输出提醒日志 ('org.apache.ibatis.session.AutoMappingUnknownColumnBehavior' 的日志等级必须设置为 WARN)
+        FAILING: 映射失败 (抛出 SqlSessionException)-->
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <!--设置超时时间，它决定驱动等待数据库响应的秒数。-->
+        <setting name="defaultStatementTimeout" value="60"/>
+        <!--允许在嵌套语句中使用分页（RowBounds）。如果允许使用则设置为 false。-->
+        <setting name="safeRowBoundsEnabled" value="true"/>
+        <!--允许在嵌套语句中使用分页（ResultHandler）。如果允许使用则设置为 false。-->
+        <setting name="safeResultHandlerEnabled" value="true"/>
+        <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，这对于有 Map.keySet() 依赖或 null 值初始化的时候是有用的。注意基本类型（int、boolean 等）是不能设置成 null 的。-->
+        <setting name="callSettersOnNulls" value="true"/>
+        <!--指定 MyBatis 增加到日志名称的前缀。-->
+        <setting name="logPrefix" value="mybatis."/>
+        <!--指定 MyBatis 所用日志的具体实现，未指定时将自动查找。-->
+        <setting name="logImpl" value="SLF4J"/>
+        <!--允许使用方法签名中的名称作为语句参数名称。 为了使用该特性，你的工程必须采用 Java 8 编译，并且加上 -parameters 选项。（从 3.4.1 开始）-->
+        <setting name="useActualParamName" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+<!--        <typeAlias type="com.sakura.education.common.utils.PageData" alias="pd"/>-->
+        <typeAlias type="java.lang.String" alias="str"/>
+    </typeAliases>
+
+</configuration>
