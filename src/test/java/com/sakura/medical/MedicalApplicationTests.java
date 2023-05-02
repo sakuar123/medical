@@ -1,33 +1,40 @@
 package com.sakura.medical;
 
-import java.math.BigDecimal;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakura.medical.common.utils.JwtUtil;
 import com.sakura.medical.common.utils.PageData;
 import com.sakura.medical.entity.AdministratorsInfo;
-import com.sakura.medical.entity.ProfessionalTitleInfo;
 import com.sakura.medical.mapper.ProfessionalTitleInfoMapper;
 import com.sakura.medical.service.AdministratorsInfoService;
 
+import io.jsonwebtoken.Claims;
+
 @SpringBootTest
 class MedicalApplicationTests {
+
+    public static void main(String[] args) {
+        Claims c = JwtUtil.parseJwt(
+                "eyJhbGciOiJIUzI1NiJ9.eyJhZG1pbmlzdHJhdG9yUGhvbmUiOiIxNjc4OTAwOTA5MCIsImFkbWluaXN0cmF0b3JOYW1lIjoiYWRtaW4iLCJhZG1pbmlzdHJhdG9yUGFzc3dvcmQiOiJiZDdlZjU1MzcyY2ZhNmNkMTczODVjNjc0MTU1NmZiZCIsInJvbGVJZCI6MSwiYWRtaW5pc3RyYXRvclN0YXR1cyI6MCwiaWQiOjEsImV4cCI6MTY4MjkyMzM4NiwiaWF0IjoxNjgyOTIzNDk1LCJhZG1pbmlzdHJhdG9yUGFzc3dvcmRTYWx0IjoibDZZazEySnIiLCJqdGkiOiI0ODU4MzQ1NTUzMTY4MjkyMzQ5NTcwNSIsImFkbWluaXN0cmF0b3JBY2NvdW50IjoiYWQxMzQ3ODkwQDE2My5jb20iLCJjcmVhdGVEYXRlIjoiMjAyMy0wNC0xMlQyMToyMDoyNiJ9._49J0hSfKKl7_ulEB1p7-MmInq11FINaB0Otd8iwYA0");
+        System.out.println(c.getId());
+    }
 
     @Autowired
     private ProfessionalTitleInfoMapper professionalTitleInfoMapper;
 
     @Test
     void t1() {
-        professionalTitleInfoMapper.insert(ProfessionalTitleInfo
-                .builder()
-                .professionalTitleName("主任医师")
-                .professionalTitleDesc("职称描述职称描述")
-                .registrationFee(new BigDecimal(60))
-                .build());
+//        professionalTitleInfoMapper.insert(ProfessionalTitleInfo
+//                .builder()
+//                .professionalTitleName("主任医师")
+//                .professionalTitleDesc("职称描述职称描述")
+//                .registrationFee(new BigDecimal(60))
+//                .build());
+        System.out.println(professionalTitleInfoMapper.selectById(1));
     }
 
     @Autowired
@@ -50,6 +57,13 @@ class MedicalApplicationTests {
     void t3() {
         Page<PageData> page = new Page<>(1, 2);
         System.out.println(JSON.toJSONString(administratorsInfoService.search("", page)));
+    }
+
+    @Test
+    void t4() {
+        PageData pageData = administratorsInfoService.login("ad1347890@163.com", "123456");
+        Claims claims = JwtUtil.parseJwt(pageData.getStringVal("token"));
+        System.out.println(JSON.toJSONString(claims));
     }
 
 }

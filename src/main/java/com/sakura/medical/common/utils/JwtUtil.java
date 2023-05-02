@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by 李七夜 on 2020/5/8 17:47
+ *
  * @author 李七夜
  */
 @Slf4j
@@ -39,6 +41,7 @@ public class JwtUtil {
     /**
      * 用户登录成功后生成Jwt
      * 使用Hs256算法  私匙使用用户密码
+     *
      * @param expirationDate jwt过期时间
      * @param user 登录成功的user对象
      */
@@ -73,6 +76,7 @@ public class JwtUtil {
 
     /**
      * Token的解密
+     *
      * @param token JWT生成的token
      */
     public static Claims parseJwt(String token) {
@@ -82,10 +86,9 @@ public class JwtUtil {
                     .setSigningKey(JWT_KEY)
                     //设置需要解析的jwt
                     .parseClaimsJws(token).getBody();
-        } catch (Exception e) {
-            log.error("解密token时异常:" + e.getMessage());
-            e.printStackTrace();
-            return null;
+        } catch (ExpiredJwtException e) {
+            log.error("解密token时异常:", e);
+            return e.getClaims();
         }
     }
 

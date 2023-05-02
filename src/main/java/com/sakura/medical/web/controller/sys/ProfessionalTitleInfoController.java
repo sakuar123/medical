@@ -27,6 +27,7 @@ import io.swagger.annotations.ApiOperation;
  * <p>
  * 职称信息表 前端控制器
  * </p>
+ *
  * @author 李七夜
  * @since 2023-04-09
  */
@@ -39,35 +40,35 @@ public class ProfessionalTitleInfoController {
     private ProfessionalTitleInfoService service;
 
     @GetMapping("/{id}")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "单个")
     public ProfessionalTitleInfo get(@PathVariable Integer id) {
         return service.get(id);
     }
 
     @GetMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "列表")
     public Page search(HttpServletRequest request, Pageable pageable) {
         return service.search(new PageData(request), pageable);
     }
 
     @PostMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "新增")
     public Boolean create(@RequestBody ProfessionalTitleInfo entity) {
         return service.create(entity);
     }
 
     @PutMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "修改")
     public Boolean update(@RequestBody ProfessionalTitleInfo entity) {
         return service.update(entity);
     }
 
     @DeleteMapping("/{id}")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "删除")
     public Boolean delete(@PathVariable Integer id) {
         return service.delete(id);

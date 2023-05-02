@@ -8,6 +8,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.alibaba.fastjson.JSON;
 import com.sakura.medical.common.utils.JsonResult;
 
 /**
@@ -21,9 +22,6 @@ public class GlobResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     /**
      * 是否开启功能
-     * @param methodParameter
-     * @param aClass
-     * @return
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -32,18 +30,11 @@ public class GlobResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     /**
      * 处理返回结果
-     * @param o
-     * @param methodParameter
-     * @param mediaType
-     * @param aClass
-     * @param serverHttpRequest
-     * @param serverHttpResponse
-     * @return
      */
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType,
             Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest,
             ServerHttpResponse serverHttpResponse) {
-        return JsonResult.success(o);
+        return JSON.toJSON(JsonResult.success(o));
     }
 }

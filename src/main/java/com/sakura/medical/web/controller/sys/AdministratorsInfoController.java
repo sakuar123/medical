@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiOperation;
  * <p>
  * 管理员信息表 前端控制器
  * </p>
+ *
  * @author 李七夜
  * @since 2023-04-12
  */
@@ -40,14 +41,14 @@ public class AdministratorsInfoController {
     private AdministratorsInfoService service;
 
     @GetMapping("/{id}")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "单个")
     public AdministratorsInfo get(@PathVariable Integer id) {
         return service.get(id);
     }
 
     @GetMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "列表")
     public Page<PageData> search(String roleName, Pageable pageable) {
         Page<PageData> page = new Page<>(pageable.getPageNumber(), pageable.getPageSize());
@@ -55,7 +56,7 @@ public class AdministratorsInfoController {
     }
 
     @PostMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "新增")
     public Boolean create(@RequestBody AdministratorsInfo entity) {
         return service.insert(entity);
@@ -68,14 +69,14 @@ public class AdministratorsInfoController {
     }
 
     @PutMapping("/")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "修改")
     public Boolean update(@RequestBody AdministratorsInfo entity) {
         return service.modify(entity);
     }
 
     @DeleteMapping("/{id}")
-    @Permission(noLogin = true)
+    @Permission
     @ApiOperation(value = "删除")
     public Boolean delete(@PathVariable Integer id) {
         return service.remove(id);

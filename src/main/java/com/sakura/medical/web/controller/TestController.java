@@ -1,23 +1,12 @@
 package com.sakura.medical.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sakura.medical.common.utils.PageData;
-import com.sakura.medical.entity.ProfessionalTitleInfo;
+import com.sakura.medical.common.annotation.Permission;
+import com.sakura.medical.common.exception.ErrorException;
 import com.sakura.medical.service.ProfessionalTitleInfoService;
-
-import io.swagger.annotations.ApiOperation;
 
 /**
  * @author 李七夜
@@ -29,5 +18,17 @@ public class TestController {
     @Autowired
     private ProfessionalTitleInfoService service;
 
+    @GetMapping("/t1")
+    @Permission(noLogin = true)
+    public Boolean t1() {
+        return Boolean.TRUE;
+    }
+
+
+    @GetMapping("/t2")
+    @Permission(noLogin = true)
+    public Boolean t2() {
+        throw new ErrorException("出错了!");
+    }
 
 }

@@ -9,6 +9,7 @@ import com.sakura.medical.entity.AdministratorsInfo;
  * <p>
  * 管理员信息表 服务类
  * </p>
+ *
  * @author 李七夜
  * @since 2023-04-12
  */
@@ -26,4 +27,6 @@ public interface AdministratorsInfoService extends IService<AdministratorsInfo> 
     Boolean remove(Integer id);
 
     Boolean updatePwd(String newPassword, PageData pageData);
+
+    PageData login(String accout, String password);
 }
