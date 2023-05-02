@@ -102,7 +102,7 @@ public class AdministratorsInfoServiceImpl extends ServiceImpl<AdministratorsInf
             AdministratorsInfo administratorsInfo = this.get(userId);
             newPassword = MD5Util.getMd5(newPassword, administratorsInfo.getAdministratorPasswordSalt());
             administratorsInfo.setAdministratorPassword(newPassword);
-            return this.removeById(administratorsInfo);
+            return this.updateById(administratorsInfo);
         } catch (Exception e) {
             log.error("修改密码失败", e);
             throw new ErrorException("修改密码失败");
