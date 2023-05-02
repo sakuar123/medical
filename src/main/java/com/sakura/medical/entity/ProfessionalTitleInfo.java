@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -56,7 +57,8 @@ public class ProfessionalTitleInfo implements Serializable {
 
     @ApiModelProperty("创建时间")
     @TableField("create_date")
-    @JsonFormat(pattern = DateUtils.SECOND_DATE_PATTERN)
+    @JsonFormat(pattern = DateUtils.DAY_DATE_PATTERN)
+    @JSONField(format = DateUtils.DAY_DATE_PATTERN)
     private LocalDateTime createDate;
 
 
