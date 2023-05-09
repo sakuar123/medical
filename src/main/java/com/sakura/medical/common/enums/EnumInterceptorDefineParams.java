@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public enum EnumInterceptorDefineParams {
-	USER_ID("1", "userId"),
-	;
-	private String cold;
-	private String name;
+    USER_ID("1", "userId"),
+    ROLE_ID("2", "roleId"),
+    ;
+    private String cold;
+    private String name;
 }

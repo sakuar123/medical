@@ -19,6 +19,7 @@ import lombok.Setter;
  * <p>
  * 角色信息表
  * </p>
+ *
  * @author 李七夜
  * @since 2023-04-10
  */

@@ -11,6 +11,7 @@ import com.sakura.medical.common.utils.PageData;
 import com.sakura.medical.entity.AdministratorsInfo;
 import com.sakura.medical.mapper.ProfessionalTitleInfoMapper;
 import com.sakura.medical.service.AdministratorsInfoService;
+import com.sakura.medical.service.PermissionsInfoService;
 
 import io.jsonwebtoken.Claims;
 
@@ -64,6 +65,14 @@ class MedicalApplicationTests {
         PageData pageData = administratorsInfoService.login("ad1347890@163.com", "123456");
         Claims claims = JwtUtil.parseJwt(pageData.getStringVal("token"));
         System.out.println(JSON.toJSONString(claims));
+    }
+
+    @Autowired
+    private PermissionsInfoService permissionsInfoService;
+
+    @Test
+    public void t5() {
+        System.out.println(JSON.toJSONString(permissionsInfoService.getPermissionList()));
     }
 
 }

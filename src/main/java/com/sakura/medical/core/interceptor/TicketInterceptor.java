@@ -62,6 +62,7 @@ public class TicketInterceptor extends HandlerInterceptorAdapter {
             Assert.isTrue(userToken.equals(redisToken), EnumJsonResultMsg.USER_TOKEN_ERR);
             //将userId放到request内置参数中,方便后面方法获取
             request.setAttribute("userId", claims.get("id"));
+            request.setAttribute("roleId", claims.get("roleId"));
             return true;
         }
         return true;

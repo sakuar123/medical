@@ -16,6 +16,7 @@ import com.sakura.medical.common.exception.ErrorException;
 import com.sakura.medical.common.utils.PageData;
 import com.sakura.medical.entity.RoleInfo;
 import com.sakura.medical.mapper.RoleInfoMapper;
+import com.sakura.medical.service.PermissionsInfoService;
 import com.sakura.medical.service.RoleInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,8 @@ public class RoleInfoServiceImpl extends ServiceImpl<RoleInfoMapper, RoleInfo> i
 
     @Autowired
     private RoleInfoMapper roleInfoMapper;
+    @Autowired
+    private PermissionsInfoService permissionsInfoService;
 
     @Override
     public RoleInfo get(Integer id) {
@@ -53,6 +56,7 @@ public class RoleInfoServiceImpl extends ServiceImpl<RoleInfoMapper, RoleInfo> i
     public Boolean create(RoleInfo roleInfo) {
         try {
             this.save(roleInfo);
+            permissionsInfoService.setPermission(roleInfo.getId());
             return Boolean.TRUE;
         } catch (Exception e) {
             log.error("新增" + msg + "失败", e);
@@ -64,6 +68,7 @@ public class RoleInfoServiceImpl extends ServiceImpl<RoleInfoMapper, RoleInfo> i
     public Boolean update(RoleInfo roleInfo) {
         try {
             this.updateById(roleInfo);
+            permissionsInfoService.setPermission(roleInfo.getId());
             return Boolean.TRUE;
         } catch (Exception e) {
             log.error("修改" + msg + "失败", e);
