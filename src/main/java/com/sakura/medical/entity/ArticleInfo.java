@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
@@ -38,6 +40,9 @@ public class ArticleInfo implements Serializable {
     @ApiModelProperty("文章略缩图")
     @TableField("article_thumbnail")
     private String articleThumbnail;
+
+    @TableField(exist = false)
+    private File articleThumbnailFile;
 
     @ApiModelProperty("文章作者")
     @TableField("article_author")
