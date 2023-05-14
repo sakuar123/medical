@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.medical.mapper.DepartmentInfoMapper">
+    <select id="search" resultType="com.sakura.medical.entity.DepartmentInfo">
+        SELECT
+        d.id AS `id`,
+        d.department_name AS `departmentName`,
+        d.parent_id AS `parentId`,
+        h.hospital_name AS `hospitalName`,
+        d.department_address AS `departmentAddress`,
+        d.create_date as  `createDate`
+        FROM
+        `department_info` d
+        JOIN hospital_navigation_info h ON d.hospital_id = h.id
+        <where>
+            1=1
+            <if test="keyWorld != '' and keyWorld != null ">
+                and d.department_name like concat('%',#{keyWorld},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

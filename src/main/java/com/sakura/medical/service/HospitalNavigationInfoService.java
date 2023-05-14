@@ -1,6 +1,9 @@
 package com.sakura.medical.service;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakura.medical.common.utils.PageData;
 import com.sakura.medical.entity.ArticleInfo;
 import com.sakura.medical.entity.HospitalNavigationInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -24,4 +27,6 @@ public interface HospitalNavigationInfoService extends IService<HospitalNavigati
     Boolean modify(HospitalNavigationInfo hospitalNavigationInfo);
 
     Boolean remove(Integer id);
+
+    List<PageData> getHospitalNavigationInfo();
 }

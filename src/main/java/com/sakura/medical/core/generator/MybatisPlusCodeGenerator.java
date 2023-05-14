@@ -19,7 +19,7 @@ public class MybatisPlusCodeGenerator {
     /**
      * 需要生成的表名
      */
-    private static String tableName = "region_info";
+    private static String tableName = "department_info";
 
     public static void main(String[] args) {
         String projectPath = System.getProperty("user.dir");
@@ -68,9 +68,9 @@ public class MybatisPlusCodeGenerator {
                 //如果不需要哪个文件就将参数设置为null
                 .templateConfig(builder ->
                         builder
-//                                .controller(null)
-//                                .service(null)
-//                                .serviceImpl(null)
+                                .controller(null)
+                                .service(null)
+                                .serviceImpl(null)
                                 .build())
                 //执行
                 .execute();
