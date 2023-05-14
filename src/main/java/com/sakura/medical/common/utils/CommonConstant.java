@@ -15,7 +15,7 @@ public class CommonConstant {
     //redis存放用户登录信息
     public static final String REDIS_USER_KEY = "REDIS_USER_KEY:";
     //redis:用户权限信息
-    public static final String REDIS_LOGIN_NAME = "REDIS_LOGIN_NAME:";
+    public static final String REDIS_REGION_INFO = "REDIS_REGION_INFO:";
     //redis:用户权限信息
     public static final String REDIS_LOGIN_EMAIL = "REDIS_LOGIN_EMAIL:";
     //redis:用户权限信息
