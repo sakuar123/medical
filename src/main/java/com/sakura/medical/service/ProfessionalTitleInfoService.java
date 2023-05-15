@@ -1,5 +1,7 @@
 package com.sakura.medical.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Pageable;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,5 +27,7 @@ public interface ProfessionalTitleInfoService extends IService<ProfessionalTitle
     Boolean update(ProfessionalTitleInfo professionalTitleInfo);
 
     Boolean delete(Integer id);
+
+    List<PageData> getProfessionalTitleInfo();
 
 }

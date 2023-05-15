@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.medical.mapper.DoctorsInfoMapper">
+    <select id="search" resultType="pageData" parameterType="pageData">
+        SELECT
+        d.id AS `doctorId`,
+        d.doctor_name AS `doctorName`,
+        d.doctor_img AS `doctorImg`,
+        ( SELECT hospital_name FROM hospital_navigation_info WHERE id = d.hospital_id ) AS `hospitalName`,
+        de.department_name as `departmentName`,
+        ( SELECT professional_title_name FROM professional_title_info WHERE id = d.professional_id ) AS `professionalTitleName`,
+        d.doctor_lable AS `doctorLable`,
+        d.doctor_desc AS `doctorDesc`
+        FROM
+        doctors_info d
+        JOIN department_info de ON d.department_id = de.id
+        <where>
+            1=1
+            <if test="doctorName != null and doctorName != '' ">
+                and d.doctor_name like concat('%',#{doctorName},'%')
+            </if>
+            <if test="departmentId != null and departmentId != '' and departmentId != 0 ">
+                and de.id = #{departmentId}
+            </if>
+        </where>
+    </select>
+</mapper>

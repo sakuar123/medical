@@ -1,4 +1,4 @@
-package com.sakura.medical.web.controller.sys;
+package com.sakura.medical.web.controller.hospital;
 
 
 import java.util.List;
@@ -17,70 +17,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sakura.medical.common.annotation.Permission;
 import com.sakura.medical.common.utils.PageData;
-import com.sakura.medical.entity.ProfessionalTitleInfo;
-import com.sakura.medical.service.ProfessionalTitleInfoService;
+import com.sakura.medical.entity.DoctorsInfo;
+import com.sakura.medical.service.DoctorsInfoService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>
- * 职称信息表 前端控制器
+ * 医生信息表 前端控制器
  * </p>
  *
  * @author 李七夜
- * @since 2023-04-09
+ * @since 2023-05-15
  */
 @RestController
-@Api(tags = "职称信息控制器")
-@RequestMapping("/medical/professional-title-info")
-public class ProfessionalTitleInfoController {
+@Api(tags = "医生信息前端控制器")
+@RequestMapping("/medical/doctors-info")
+public class DoctorsInfoController {
 
     @Autowired
-    private ProfessionalTitleInfoService service;
+    private DoctorsInfoService service;
 
     @GetMapping("/{id}")
-    @Permission
     @ApiOperation(value = "单个")
-    public ProfessionalTitleInfo get(@PathVariable Integer id) {
+    public DoctorsInfo get(@PathVariable Integer id) {
         return service.get(id);
     }
 
-    @GetMapping("/getProfessionalTitleInfo")
-    @Permission
-    @ApiOperation(value = "单个")
-    public List<PageData> getProfessionalTitleInfo() {
-        return service.getProfessionalTitleInfo();
+    @GetMapping("")
+    @ApiOperation(value = "医生标签")
+    public List<PageData> getDoctorLables() {
+        return service.getDoctorLables();
     }
 
     @GetMapping("/")
-    @Permission
     @ApiOperation(value = "列表")
-    public Page search(HttpServletRequest request, Pageable pageable) {
-        return service.search(new PageData(request), pageable);
+    public Page<PageData> search(Pageable pageable, HttpServletRequest request) {
+        return service.search(new Page<>(pageable.getPageNumber(), pageable.getPageSize()), new PageData(request));
     }
 
     @PostMapping("/")
-    @Permission
     @ApiOperation(value = "新增")
-    public Boolean create(@RequestBody ProfessionalTitleInfo entity) {
+    public Boolean create(@RequestBody DoctorsInfo entity) {
         return service.create(entity);
     }
 
     @PutMapping("/")
-    @Permission
     @ApiOperation(value = "修改")
-    public Boolean update(@RequestBody ProfessionalTitleInfo entity) {
-        return service.update(entity);
+    public Boolean modify(@RequestBody DoctorsInfo entity) {
+        return service.modify(entity);
     }
 
     @DeleteMapping("/{id}")
-    @Permission
     @ApiOperation(value = "删除")
-    public Boolean delete(@PathVariable Integer id) {
-        return service.delete(id);
+    public Boolean remove(@PathVariable Integer id) {
+        return service.remove(id);
     }
 
 }

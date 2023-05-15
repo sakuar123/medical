@@ -1,5 +1,7 @@
 package com.sakura.medical.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import com.sakura.medical.common.exception.ErrorException;
 import com.sakura.medical.common.utils.ObjectTools;
 import com.sakura.medical.common.utils.PageData;
@@ -21,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 职称信息表 服务实现类
  * </p>
+ *
  * @author 李七夜
  * @since 2023-04-09
  */
@@ -81,5 +85,19 @@ public class ProfessionalTitleInfoServiceImpl extends
             log.error("删除职称失败", e);
             throw new ErrorException("删除职称失败");
         }
+    }
+
+    @Override
+    public List<PageData> getProfessionalTitleInfo() {
+        List<ProfessionalTitleInfo> professionalTitleInfoList = professionalTitleInfoMapper
+                .selectList(new LambdaQueryWrapper<>());
+        List<PageData> result = Lists.newArrayList();
+        professionalTitleInfoList.forEach(professionalTitleInfo -> {
+            PageData pageData = new PageData();
+            pageData.put("professionalTitleInfoId", professionalTitleInfo.getId());
+            pageData.put("professionalTitleInfoName", professionalTitleInfo.getProfessionalTitleName());
+            result.add(pageData);
+        });
+        return result;
     }
 }

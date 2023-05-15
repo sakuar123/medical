@@ -39,7 +39,7 @@
     </settings>
 
     <typeAliases>
-<!--        <typeAlias type="com.sakura.education.common.utils.PageData" alias="pd"/>-->
+        <typeAlias type="com.sakura.medical.common.utils.PageData" alias="pd"/>
         <typeAlias type="java.lang.String" alias="str"/>
     </typeAliases>
 
