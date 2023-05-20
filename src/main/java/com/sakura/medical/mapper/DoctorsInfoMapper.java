@@ -1,6 +1,7 @@
 package com.sakura.medical.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -18,6 +19,6 @@ import com.sakura.medical.entity.DoctorsInfo;
 @Mapper
 public interface DoctorsInfoMapper extends BaseMapper<DoctorsInfo> {
 
-    Page<PageData> saerch(Page<PageData> page, PageData pageData);
+    Page<PageData> search(Page<PageData> page, @Param("pageData") PageData pageData);
 
 }

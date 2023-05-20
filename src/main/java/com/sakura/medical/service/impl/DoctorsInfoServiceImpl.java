@@ -55,7 +55,7 @@ public class DoctorsInfoServiceImpl extends ServiceImpl<DoctorsInfoMapper, Docto
 
     @Override
     public Page<PageData> search(Page<PageData> page, PageData pageData) {
-        return doctorsInfoMapper.saerch(page, pageData);
+        return doctorsInfoMapper.search(page, pageData);
     }
 
     @Override
