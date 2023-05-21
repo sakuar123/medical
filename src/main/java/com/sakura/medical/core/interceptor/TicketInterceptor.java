@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.cors.reactive.PreFlightRequestHandler;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.sakura.medical.common.annotation.Permission;
 import com.sakura.medical.common.enums.EnumJsonResultMsg;

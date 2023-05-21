@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.medical.mapper.MedicalExaminationInfoMapper">
+    <select id="search" resultType="pageData" parameterType="java.lang.String">
+        SELECT
+        m.id AS `id`,
+        m.project_code AS `projectCode`,
+        m.examination_name AS `examinationName`,
+        c.combo_name AS `comboName`,
+        m.examination_price AS `examinationPrice`,
+        m.examination_desc AS `examinationDesc`,
+        m.examination_note AS `examinationNote`,
+        m.examination_state AS `examinationState`
+        FROM
+        medical_examination_info m
+        JOIN combo_type_info c ON m.combo_id = c.id
+        <where>
+            1=1
+            <if test="keyWorld != '' and keyWorld != null ">
+                and m.examination_name like concat('%',#{keyWorld},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

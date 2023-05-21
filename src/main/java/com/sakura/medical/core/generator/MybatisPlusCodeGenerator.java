@@ -19,7 +19,7 @@ public class MybatisPlusCodeGenerator {
     /**
      * 需要生成的表名
      */
-    private static String tableName = "doctors_info";
+    private static String tableName = "medical_combo_info";
 
     public static void main(String[] args) {
         String projectPath = System.getProperty("user.dir");

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.medical.mapper.MedicalComboInfoMapper">
+    <select id="search" resultType="pageData" parameterType="pageData">
+        SELECT
+        m.id AS `id`,
+        IF
+        (
+        m.id >= 10,
+        IF
+        ( m.id >= 100, CONCAT( 'SWTT0', m.id ), CONCAT( 'SWTT00', m.id ) ),
+        CONCAT( 'SWTT000', m.id )
+        ) AS `comboCode`,
+        m.combo_name AS `comboName`,
+        m.combo_img AS `comboImg`,
+        t.combo_name AS `comboTypeName`,
+        ( SELECT h.hospital_name AS `hospitalName` FROM hospital_navigation_info h WHERE h.id = m.hospital_id ) AS `hospitalName`,
+        m.combo_price AS `comboPrice`,
+        (SELECT GROUP_CONCAT( mx.examination_name SEPARATOR ',' ) FROM medical_examination_info mx WHERE FIND_IN_SET (mx.id,m.medical_examination_id)) AS `examinationName`,
+        m.combo_state AS `comboState`
+        FROM
+        medical_combo_info m
+        JOIN combo_type_info t ON m.combo_type_id = t.id
+        <where>
+            1=1
+            <if test="pageData.comboName != null and  pageData.comboName != '' ">
+                and m.combo_name like concat('%',#{pageData.comboName},'%')
+            </if>
+            <if test="pageData.comboTypeId != null and  pageData.comboTypeId != '' and pageData.comboTypeId != 0 ">
+                and t.id = #{pageData.comboTypeId}
+            </if>
+        </where>
+    </select>
+</mapper>

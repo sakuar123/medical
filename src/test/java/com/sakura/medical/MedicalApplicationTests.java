@@ -11,6 +11,8 @@ import com.sakura.medical.common.utils.CommonsUtil;
 import com.sakura.medical.common.utils.JwtUtil;
 import com.sakura.medical.common.utils.PageData;
 import com.sakura.medical.entity.AdministratorsInfo;
+import com.sakura.medical.entity.ComboTypeInfo;
+import com.sakura.medical.mapper.ComboTypeInfoMapper;
 import com.sakura.medical.mapper.DoctorsInfoMapper;
 import com.sakura.medical.mapper.ProfessionalTitleInfoMapper;
 import com.sakura.medical.service.AdministratorsInfoService;
@@ -88,5 +90,19 @@ class MedicalApplicationTests {
     @Test
     public void t6() {
         doctorsInfoMapper.selectList(new LambdaQueryWrapper<>());
+    }
+
+    @Autowired
+    private ComboTypeInfoMapper comboTypeInfoMapper;
+
+    @Test
+    void t7() {
+        ComboTypeInfo comboTypeInfo = ComboTypeInfo
+                .builder()
+                .comboName("儿童套餐A")
+                .comboDesc("这是儿童套餐B")
+                .build();
+        System.out.println(comboTypeInfoMapper.insert(comboTypeInfo));
+        System.out.println(comboTypeInfo.getId());
     }
 }
